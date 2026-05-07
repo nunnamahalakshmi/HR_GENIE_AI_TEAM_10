@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile - HRMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --sidebar-bg: #22384c;
+      --sidebar-hover: #2d4a63;
+      --sidebar-active: #2d4a63;
+      --bg-color: #f0f2f5;
+      --card-bg: #ffffff;
+      --text-main: #333333;
+      --text-label: #a87b51;
+      --border-color: #e2e8f0;
+      --topbar-bg: #22384c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Top Bar */
+    nav {
+      height: 60px;
+      background-color: var(--topbar-bg);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      justify-content: space-between;
+      color: white;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 20;
+      flex-shrink: 0;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hamburger {
+      font-size: 20px;
+      cursor: pointer;
+      color: #fff;
+      opacity: 0.8;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background-color: #16a085;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-mark i {
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .nav-logo-text span {
+      color: #16a085;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .nav-user {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .nav-user:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-user-circle {
+      background: #e67e22;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .nav-user-dropdown-container {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 150px;
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      z-index: 100;
+    }
+
+    .dropdown-menu.show {
+      display: flex !important;
+    }
+
+    .dropdown-menu a {
+      padding: 12px 15px;
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dropdown-menu a i {
+      color: #555;
+      width: 16px;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f8fafc;
+      color: var(--text-label);
+    }
+
+    /* Layout */
+    .app-body {
+      display: flex;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: var(--sidebar-bg);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex-shrink: 0;
+      z-index: 10;
+      overflow-y: auto;
+    }
+
+    .profile-header {
+      padding: 30px 20px 20px;
+      text-align: center;
+    }
+
+    .avatar-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #000;
+      border: 2px solid #e67e22;
+      /* Orange ring from image */
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .avatar-circle i {
+      font-size: 60px;
+      color: #fff;
+      margin-bottom: -5px;
+    }
+
+    .profile-name {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 10px 0;
+      flex-grow: 1;
+    }
+
+    .nav-item-container {
+      margin-bottom: 2px;
+    }
+
+    .nav-item {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 14px;
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-item-left i {
+      width: 25px;
+      font-size: 14px;
+      text-align: center;
+      margin-right: 10px;
+    }
+
+    .nav-item:hover {
+      background-color: var(--sidebar-hover);
+    }
+
+    .nav-item.active {
+      background-color: var(--sidebar-active);
+      border-left: 3px solid #e67e22;
+    }
+
+    /* Main Content */
+    .main-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .title-bar {
+      padding: 15px 40px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .title-tag {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      gap: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .title-tag i {
+      background: #8bc34a;
+      /* Green tag */
+      color: white;
+      padding: 6px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    .content-area {
+      padding: 0px 40px 40px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+
+    /* Profile Card specific to Image */
+    .profile-card {
+      background: var(--card-bg);
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 50px;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-heading {
+      font-size: 22px;
+      color: #555;
+      font-weight: 400;
+      padding-bottom: 12px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #e67e22;
+      /* Orange line across */
+    }
+
+    .profile-info-box {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 40px;
+      padding-left: 20px;
+    }
+
+    .avatar-large {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #000;
+      border: 3px solid #e67e22;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .avatar-large i {
+      font-size: 80px;
+      color: #fff;
+      margin-bottom: -5px;
+    }
+
+    .profile-text .name {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .profile-text .role {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .profile-text .college {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Information Tables */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 50px;
+    }
+
+    .info-table td {
+      padding: 15px 10px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 14px;
+    }
+
+    .info-table td.label {
+      color: var(--text-label);
+      font-weight: 500;
+      width: 20%;
+    }
+
+    .info-table td.value {
+      color: #444;
+      width: 30%;
+    }
+
+    .info-table td.value input {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      color: #333;
+    }
+
+    .info-table td.value input:focus {
+      border-color: #16a085;
+    }
+
+    /* Education Table */
+    .edu-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 50px;
+    }
+
+    .edu-table th {
+      padding: 15px 10px;
+      text-align: left;
+      font-size: 14px;
+      color: var(--text-label);
+      font-weight: 500;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .edu-table td {
+      padding: 15px 10px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+      color: #444;
+    }
+
+    .edu-table td input {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      color: #333;
+    }
+
+    .edu-table td input:focus {
+      border-color: #16a085;
+    }
+
+    .btn-edit-abs {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background: #e67e22;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+      transition: 0.2s;
+    }
+
+    .btn-edit-abs:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  
+    /* Top Bar */
+    nav { height: 60px; background-color: var(--topbar-bg, #2b3e50); display: flex; align-items: center; padding: 0 20px; justify-content: space-between; color: white; border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 20; }
+    .nav-left { display: flex; align-items: center; gap: 20px; }
+    .hamburger { font-size: 20px; cursor: pointer; color: #88929e; }
+    .logo { display: flex; align-items: center; text-decoration: none; }
+    .logo-icon { background: #16a085; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+    .logo-icon i { color: #fff; font-size: 18px; }
+    .logo-text { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: #fff; letter-spacing: 0.5px; }
+    .logo-highlight { color: #16a085; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 22px; }
+    .nav-user-container { position: relative; cursor: pointer; }
+    .nav-user-circle { background: #e67e22; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; }
+    .user-dropdown { position: absolute; top: 50px; right: 0; background: white; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); border-radius: 4px; width: 150px; display: none; flex-direction: column; z-index: 100; border: 1px solid #eee; }
+    .user-dropdown.show { display: flex; }
+    .user-dropdown a { padding: 12px 15px; text-decoration: none; color: #555; font-size: 14px; display: flex; align-items: center; gap: 10px; transition: background 0.2s; }
+    .user-dropdown a:hover { background: #f8f9fa; }
+
+</style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+    <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      <i class="fas fa-bars hamburger"></i>
+      <a href="hrms_self_details-page.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
+        <div class="logo-text">HRMS <span class="logo-highlight">Portal</span></div>
+      </a>
+    </div>
+
+    <div class="nav-user-container">
+      <div class="nav-user" onclick="toggleDropdown()">
+        <div class="nav-user-circle"><i class="fas fa-user" style="font-size: 16px;"></i></div>
+      </div>
+      <div class="user-dropdown" id="userDropdown">
+        <a href="#"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+        <a href="hrms_employee_login_page.html" onclick="localStorage.removeItem('userEmail')"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="app-body">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="profile-header">
+        <div class="avatar-circle">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="profile-name" id="sidebar-name"></div>
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item-container">
+          <a href="hrms_my_profile.html" class="nav-item active">
+            <div class="nav-item-left"><i class="fas fa-id-badge"></i> Profile</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+          <!-- Main Wrapper -->
+          <div class="main-wrapper">
+            <div class="title-bar">
+              <div class="title-tag">
+                <i class="fas fa-user"></i> <span id="top-bar-title">Personal Data</span>
+              </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+
+              <div class="profile-card">
+                <h2 class="section-heading">My Profile</h2>
+
+                <div class="profile-info-box">
+                  <div class="avatar-large">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="profile-text">
+                    <div class="name" id="main-name"></div>
+                    <div class="role" id="main-role"></div>
+                    <div class="college" id="main-college"></div>
+                  </div>
+                </div>
+
+                <table class="info-table" id="infoTable">
+                  <tr>
+                    <td class="label">Date Of Birth:</td>
+                    <td class="value" id="val-dob"></td>
+                    <td class="label">Aadhaar No:</td>
+                    <td class="value" id="val-aadhaar"></td>
+                  </tr>
+                  <tr>
+                    <td class="label">PinNo:</td>
+                    <td class="value" id="val-pin"></td>
+                    <td class="label">D No:</td>
+                    <td class="value" id="val-dno"></td>
+                  </tr>
+                  <tr>
+                    <td class="label">Street:</td>
+                    <td class="value" id="val-street"></td>
+                    <td class="label">city:</td>
+                    <td class="value" id="val-city"></td>
+                  </tr>
+                  <tr>
+                    <td class="label">Mobile No:</td>
+                    <td class="value" id="val-mobile"></td>
+                    <td class="label">Email Id:</td>
+                    <td class="value" id="val-email"></td>
+                  </tr>
+                </table>
+
+                <h2 class="section-heading">Educational Qualification</h2>
+                <table class="edu-table" id="eduTable">
+                  <thead>
+                    <tr>
+                      <th>Degree</th>
+                      <th>Institution</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>SSC</td>
+                      <td class="edu-val" id="val-edu-1-inst"></td>
+                    </tr>
+                    <tr>
+                      <td>Intermediate</td>
+                      <td class="edu-val" id="val-edu-2-inst"></td>
+                    </tr>
+                    <tr>
+                      <td>B.Tech</td>
+                      <td class="edu-val" id="val-edu-3-inst"></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h2 class="section-heading">Experience</h2>
+                <p style="color: #666; font-size: 14px; padding: 10px;">No experience data available.</p>
+
+              </div>
+
+              <button class="btn-edit-abs" onclick="toggleEditMode(this)"><i class="fas fa-edit"></i> Edit
+                Profile</button>
+            </div>
+          </div>
+    </div>
+
+    <script>
+      function toggleDropdown() {
+        document.getElementById("userDropdown").classList.toggle("show");
+      }
+
+      window.addEventListener('click', function (e) {
+        if (!document.querySelector('.nav-user-dropdown-container').contains(e.target)) {
+          document.getElementById('userDropdown').classList.remove('show');
+        }
+      });
+
+      // Power Automate Backend Integration Template
+      const POWER_AUTOMATE_GET_URL = "https://default7359f89671e24daeb8a315cdf97f2f.10.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/ec32b60336464dcf875ee72b34c70463/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA0ATqlhW8Tx7IdB9wmtWdNz_KMt_gGuPf0bUbMA0g4";
+      const POWER_AUTOMATE_POST_URL = "https://default7359f89671e24daeb8a315cdf97f2f.10.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/4f834bd6f1ea4a729a8d6a8546fdd9f5/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=mxxjjAYoHS0i4Rw-5-zEHoP5ukQNuFlNx1dBFX7-K-o";
+
+      // Load data on page load
+      window.onload = fetchProfileData;
+
+      async function fetchProfileData() {
+        try {
+          const userEmail = localStorage.getItem("userEmail") || "";
+          const finalUrl = POWER_AUTOMATE_GET_URL + "&email=" + encodeURIComponent(userEmail);
+          const response = await fetch(finalUrl);
+
+          let data = await response.json();
+
+          // Handle array response from Power Automate's "Get items"
+          if (Array.isArray(data)) {
+            if (data.length === 0) {
+              console.log("No profile found for this email.");
+              return;
+            }
+            data = data[0]; // Take the first matching record
+          }
+
+
+          // Map the backend data to your HTML elements
+          document.getElementById('sidebar-name').innerText = data.name || "";
+          document.getElementById('main-name').innerText = data.name || "";
+          document.getElementById('main-role').innerText = data.role || "";
+          document.getElementById('main-college').innerText = data.college || "";
+
+          document.getElementById('val-dob').innerText = data['val-dob'] || "";
+          document.getElementById('val-aadhaar').innerText = data['val-aadhaar'] || "";
+          document.getElementById('val-pin').innerText = data['val-pin'] || "";
+          document.getElementById('val-dno').innerText = data['val-dno'] || "";
+          document.getElementById('val-street').innerText = data['val-street'] || "";
+          document.getElementById('val-city').innerText = data['val-city'] || "";
+          document.getElementById('val-mobile').innerText = data['val-mobile'] || "";
+          document.getElementById('val-email').innerText = data['val-email'] || "";
+
+          // Education mapping
+          document.getElementById('val-edu-1-inst').innerText = data['val-edu-1-inst'] || "";
+          document.getElementById('val-edu-2-inst').innerText = data['val-edu-2-inst'] || "";
+          document.getElementById('val-edu-3-inst').innerText = data['val-edu-3-inst'] || "";
+        } catch (error) {
+          console.error("Error fetching data from Power Automate:", error);
+        }
+      }
+
+      async function saveProfileData(payload) {
+        try {
+          const response = await fetch(POWER_AUTOMATE_POST_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (response.ok) {
+            alert("Data saved successfully to Power Automate!");
+          } else {
+            alert("Failed to save data.");
+          }
+        } catch (error) {
+          console.error("Error saving to Power Automate:", error);
+          alert("Error connecting to backend.");
+        }
+      }
+
+      // Toggle Edit Mode Logic for Profile
+      function toggleEditMode(button) {
+        const isEditing = button.innerText.includes('Save');
+        const valueCells = document.querySelectorAll('.info-table .value');
+        const eduCells = document.querySelectorAll('#eduTableBody .edu-val');
+
+        if (!isEditing) {
+          // Switch to Edit Mode
+          button.innerHTML = '<i class="fas fa-save"></i> Save Profile';
+          button.style.background = '#27ae60'; // Green save button
+
+          // Convert info table to inputs
+          valueCells.forEach(td => {
+            const text = td.innerText.trim();
+            td.innerHTML = `<input type="text" value="${text}">`;
+          });
+
+          // Convert edu table to inputs
+          eduCells.forEach(td => {
+            const text = td.innerText.trim();
+            td.innerHTML = `<input type="text" value="${text}">`;
+          });
+
+        } else {
+          // Save Mode (Send to Power Automate Backend)
+          button.innerHTML = '<i class="fas fa-edit"></i> Edit Profile';
+          button.style.background = '#e67e22'; // Orange edit button
+
+          // Prepare Payload object for Power Automate (Flat structure)
+          const payload = {};
+
+          // Extract values from inputs
+          valueCells.forEach(td => {
+            const input = td.querySelector('input');
+            if (input) {
+              td.innerText = input.value;
+              payload[td.id] = input.value;
+            }
+          });
+
+          eduCells.forEach(td => {
+            const input = td.querySelector('input');
+            if (input) {
+              td.innerText = input.value;
+              payload[td.id] = input.value;
+            }
+          });
+
+          // Add name, role, college to payload
+          payload.name = document.getElementById('main-name').innerText;
+          payload.role = document.getElementById('main-role').innerText;
+          payload.college = document.getElementById('main-college').innerText;
+
+          // Trigger notification that backend save is ready
+          console.log("Data ready for Power Automate:", payload);
+
+          // Actually send data to Power Automate
+          saveProfileData(payload);
+          // alert("Profile details prepared! Uncomment saveProfileData(payload) in the code to send to Power Automate.");
+        }
+      }
+    </script>
+</body>
+
+</html>
