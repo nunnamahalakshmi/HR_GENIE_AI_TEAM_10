@@ -11,13 +11,15 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --sidebar-bg: #2b3e50;
-      --sidebar-hover: #34495e;
-      --bg-color: #f2f3f5;
-      --topbar-bg: #2b3e50;
-      --text-main: #333;
-      --brand-green: #16a085;
-      --cyan-btn: #5bc0de;
+      --primary: #0d9298;
+      --primary-hover: #0a6b6e;
+      --sidebar-bg: #0d1e27;
+      --sidebar-hover: #122533;
+      --bg-color: #f4f6f8;
+      --topbar-bg: #ffffff;
+      --text-main: #333333;
+      --border-color: #e5e7eb;
+      --cyan-badge: #0d9298;
     }
 
     * {
@@ -44,8 +46,9 @@
       align-items: center;
       padding: 0 20px;
       justify-content: space-between;
-      color: white;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
       z-index: 20;
     }
 
@@ -55,11 +58,7 @@
       gap: 20px;
     }
 
-    .hamburger {
-      font-size: 20px;
-      cursor: pointer;
-      color: #88929e;
-    }
+    .hamburger { font-size: 20px; cursor: pointer; color: var(--primary); }
 
     .logo {
       display: flex;
@@ -67,36 +66,16 @@
       text-decoration: none;
     }
 
-    .logo-icon {
-      background: var(--brand-green);
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
-    }
+    .logo-icon { background: var(--primary); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
 
     .logo-icon i {
       color: #fff;
       font-size: 18px;
     }
 
-    .logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: 0.5px;
-    }
+    .logo-text { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--sidebar-bg); letter-spacing: 0.5px; }
 
-    .logo-highlight {
-      color: var(--brand-green);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 22px;
-    }
+    .logo-highlight { color: var(--primary); font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 22px; }
 
     .nav-user-container {
       position: relative;
@@ -104,13 +83,13 @@
     }
 
     .nav-user-circle {
-      background: #e67e22;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--primary); 
+      width: 35px; 
+      height: 35px; 
+      border-radius: 50%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
       color: #fff;
     }
 
@@ -158,12 +137,13 @@
     .sidebar {
       width: 240px;
       background-color: var(--sidebar-bg);
-      color: #b0bac3;
+      color: #94a3b8;
       display: flex;
       flex-direction: column;
       height: 100%;
       flex-shrink: 0;
       overflow-y: auto;
+      background-image: radial-gradient(circle at 20% 90%, rgba(13, 146, 152, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 90%, rgba(10, 107, 110, 0.04) 0%, transparent 50%);
     }
 
     .profile-header {
@@ -176,7 +156,7 @@
       height: 70px;
       border-radius: 50%;
       background-color: #000;
-      border: 2px solid #e67e22;
+      border: 2px solid var(--primary);
       margin: 0 auto 10px;
       display: flex;
       align-items: flex-end;
@@ -215,23 +195,9 @@
       transition: all 0.2s;
     }
 
-    .nav-item i {
-      width: 25px;
-      font-size: 14px;
-      text-align: left;
-    }
-
-    .nav-item:hover {
-      background-color: var(--sidebar-hover);
-      color: #fff;
-    }
-
-    .nav-item.active {
-      background-color: var(--sidebar-hover);
-      color: #fff;
-      border-left: 3px solid #fff;
-      padding-left: 22px;
-    }
+    .nav-item i { width: 25px; font-size: 14px; text-align: left; }
+    .nav-item:hover { background-color: var(--sidebar-hover); color: #fff; }
+    .nav-item.active { background-color: var(--primary); color: #fff; border-radius: 0 20px 20px 0; margin-right: 15px; padding-left: 25px; }
 
     /* Main Content */
     .main-wrapper {
@@ -257,8 +223,8 @@
     }
 
     .tab-icon {
-      background-color: #5bc0de;
-      color: white;
+      background-color: #e0f2f1;
+      color: var(--primary);
       padding: 8px 15px;
       display: flex;
       align-items: center;
