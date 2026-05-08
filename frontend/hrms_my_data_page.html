@@ -11,19 +11,19 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --sidebar-bg: #2b3a4a;
-      --sidebar-sub-bg: #364554;
-      --sidebar-hover: #3d4f61;
-      --sidebar-active: #45d0de;
-      /* Cyan */
+      --primary: #0d9298;
+      --primary-hover: #0a6b6e;
+      --sidebar-bg: #0d1e27;
+      --sidebar-hover: #122533;
+      --sidebar-sub-bg: #1a3242;
+      --sidebar-active: #0d9298;
       --bg-color: #f4f6f8;
       --card-bg: #ffffff;
       --text-main: #333333;
-      --text-label: #d28c46;
-      /* Orange/Brown */
-      --border-color: #e2e8f0;
-      --topbar-bg: #2b3a4a;
-      --btn-cyan: #5bc0de;
+      --text-label: #0a6b6e;
+      --border-color: #e5e7eb;
+      --topbar-bg: #ffffff;
+      --btn-cyan: #0d9298;
       --btn-orange: #f0ad4e;
     }
 
@@ -51,8 +51,9 @@
       align-items: center;
       padding: 0 30px;
       justify-content: space-between;
-      color: white;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      color: var(--text-main);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      border-bottom: 1px solid var(--border-color);
       z-index: 20;
       flex-shrink: 0;
     }
@@ -66,19 +67,19 @@
     .hamburger {
       font-size: 20px;
       cursor: pointer;
-      color: #a3b8cc;
+      color: var(--primary);
       transition: color 0.3s;
     }
 
     .hamburger:hover {
-      color: #fff;
+      color: var(--primary-hover);
     }
 
     .nav-logo {
       font-family: 'Playfair Display', serif;
       font-size: 22px;
       font-weight: 600;
-      color: #fff;
+      color: var(--sidebar-bg);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -88,7 +89,7 @@
     .nav-logo-mark {
       width: 30px;
       height: 30px;
-      background: linear-gradient(135deg, #0d9298, #0a6b6e);
+      background: var(--primary);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -101,11 +102,11 @@
     }
 
     .nav-logo-text span {
-      color: var(--sidebar-active);
+      color: var(--primary);
     }
 
     .nav-user {
-      color: #e67e22;
+      color: var(--primary);
       font-size: 26px;
       cursor: pointer;
       transition: transform 0.2s;
@@ -165,11 +166,10 @@
       overflow: hidden;
     }
 
-    /* Sidebar */
     .sidebar {
       width: 250px;
       background-color: var(--sidebar-bg);
-      color: #fff;
+      color: #94a3b8;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -177,6 +177,7 @@
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
       z-index: 10;
       overflow-y: auto;
+      background-image: radial-gradient(circle at 20% 90%, rgba(13, 146, 152, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 90%, rgba(10, 107, 110, 0.04) 0%, transparent 50%);
     }
 
     .sidebar::-webkit-scrollbar {
@@ -199,7 +200,7 @@
       height: 70px;
       border-radius: 50%;
       background-color: #000;
-      border: 2px solid var(--text-label);
+      border: 2px solid var(--primary);
       margin: 0 auto 12px;
       display: flex;
       align-items: flex-end;
@@ -263,6 +264,8 @@
     .nav-item.active {
       background-color: var(--sidebar-active);
       color: #fff;
+      border-radius: 0 20px 20px 0;
+      margin-right: 15px;
     }
 
     .sub-menu {
@@ -376,7 +379,7 @@
     }
 
     .section-title.orange-border {
-      border-bottom: 2px solid #f39c12;
+      border-bottom: 2px solid var(--primary);
     }
 
     /* Forms */
@@ -466,6 +469,158 @@
 
     .d-value input:focus {
       border-color: var(--sidebar-active);
+    }
+
+    /* New Profile Cards Styles */
+    .profile-card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 25px 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .profile-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .profile-card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .profile-card-icon {
+      width: 36px;
+      height: 36px;
+      background: #e0f2f1;
+      color: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .profile-card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .profile-btn-outline {
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .profile-btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .profile-body {
+      display: flex;
+      gap: 40px;
+    }
+
+    .profile-col {
+      flex: 1;
+    }
+
+    .profile-col:first-child {
+      border-right: 1px solid #f1f5f9;
+      padding-right: 40px;
+    }
+
+    .profile-info-row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .profile-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 200px;
+      color: #64748b;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .profile-label i {
+      color: #f0ad4e;
+      width: 16px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .profile-separator {
+      margin-right: 15px;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .profile-val {
+      color: #334155;
+      font-weight: 500;
+      flex: 1;
+      word-break: break-word;
+      min-height: 20px;
+    }
+
+    .profile-val input {
+      width: 100%;
+      max-width: 300px;
+      padding: 6px 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      color: #333;
+    }
+
+    .profile-val input:focus {
+      border-color: var(--sidebar-active);
+    }
+
+    .page-header-new {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .page-title-new h1 {
+      font-size: 22px;
+      color: #1e293b;
+      margin-bottom: 5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    .page-title-new p {
+      font-size: 14px;
+      color: #64748b;
     }
 
     /* Soft Copy Section */
@@ -813,10 +968,12 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-      <div class="title-bar">
-        <div class="title-tag">
-          <i class="fas fa-user" id="top-bar-icon"></i> <span id="top-bar-title">Personal Data</span>
+      <div class="page-header-new" style="padding: 20px 40px 0;">
+        <div class="page-title-new">
+          <h1><i class="fas fa-user" id="top-bar-icon" style="display: none;"></i> <span id="top-bar-title">Personal Data</span></h1>
+          <p>View and manage your personal and professional information</p>
         </div>
+        <button class="btn btn-cyan" style="display: flex; align-items: center; gap: 8px; border-radius: 4px; height: 38px;"><i class="fas fa-user-edit"></i> Update Profile</button>
       </div>
 
       <!-- Content Area -->
@@ -826,55 +983,87 @@
 
         <!-- Personal Details -->
         <div class="data-view-container active" id="view-personal-details">
-          <div class="data-card">
-            <h2 class="section-title orange-border">Professional</h2>
-            <div class="data-grid">
-              <div class="data-row"><span class="d-label">Name :</span><span class="d-value" id="prof-name"></span>
+          <div class="profile-card">
+            <div class="profile-card-header">
+              <div class="profile-card-title-group">
+                <div class="profile-card-icon"><i class="fas fa-briefcase"></i></div>
+                <div class="profile-card-title">Professional</div>
               </div>
-              <div class="data-row"><span class="d-label">Staff Code :</span><span class="d-value"
-                  id="prof-staff-code"></span></div>
-              <div class="data-row"><span class="d-label">College :</span><span class="d-value"
-                  id="prof-college"></span></div>
-              <div class="data-row"><span class="d-label">Department :</span><span class="d-value"
-                  id="prof-dept"></span></div>
-              <div class="data-row"><span class="d-label">Designation :</span><span class="d-value"
-                  id="prof-desig"></span></div>
-              <div class="data-row"><span class="d-label">Staff Type :</span><span class="d-value"
-                  id="prof-staff-type"></span></div>
-              <div class="data-row"><span class="d-label">Date Of Joining :</span><span class="d-value"
-                  id="prof-doj"></span></div>
-              <div class="data-row"></div> <!-- empty space -->
-              <div class="data-row"><span class="d-label">Mobile Number :</span><span class="d-value"
-                  id="prof-mobile"></span></div>
-              <div class="data-row"><span class="d-label">Alternate Mobile Number :</span><span class="d-value"
-                  id="prof-alt-mobile"></span></div>
-              <div class="data-row"><span class="d-label">Email ID :</span><span class="d-value" id="prof-email"></span>
-              </div>
-              <div class="data-row"><span class="d-label">Alternate Email ID :</span><span class="d-value"
-                  id="prof-alt-email"></span></div>
+              <button class="profile-btn-outline" onclick="toggleEditMode(this)"><i class="fas fa-pen"></i> Edit</button>
             </div>
-            <button class="btn btn-orange btn-edit-abs" onclick="toggleEditMode(this)"><i class="fas fa-edit"></i>
-              Edit</button>
+            <div class="profile-body">
+              <div class="profile-col">
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-user"></i> Name</div><span class="profile-separator">:</span><div class="profile-val" id="prof-name"></div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-building"></i> College</div><span class="profile-separator">:</span><div class="profile-val" id="prof-college"></div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-briefcase"></i> Designation</div><span class="profile-separator">:</span><div class="profile-val" id="prof-desig"></div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="far fa-calendar-alt"></i> Date of Joining</div><span class="profile-separator">:</span><div class="profile-val" id="prof-doj">01 Jan 2023</div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-mobile-alt"></i> Mobile Number</div><span class="profile-separator">:</span><div class="profile-val" id="prof-mobile"></div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="far fa-envelope"></i> Email ID</div><span class="profile-separator">:</span><div class="profile-val" id="prof-email"></div>
+                </div>
+              </div>
+              <div class="profile-col">
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-id-card"></i> Staff Code</div><span class="profile-separator">:</span><div class="profile-val" id="prof-staff-code">STF12345</div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-sitemap"></i> Department</div><span class="profile-separator">:</span><div class="profile-val" id="prof-dept">IT Department</div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-user-tag"></i> Staff Type</div><span class="profile-separator">:</span><div class="profile-val" id="prof-staff-type">Permanent</div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-mobile-alt"></i> Alternate Mobile Number</div><span class="profile-separator">:</span><div class="profile-val" id="prof-alt-mobile">9123456780</div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="far fa-envelope"></i> Alternate Email ID</div><span class="profile-separator">:</span><div class="profile-val" id="prof-alt-email">suresh.kumar1@abc.com</div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="data-card">
-            <h2 class="section-title orange-border">Personal</h2>
-            <div class="data-grid">
-              <div class="data-row"><span class="d-label">Mother Tongue :</span><span class="d-value"
-                  id="pers-mother-tongue"></span></div>
-              <div class="data-row"><span class="d-label">Religion :</span><span class="d-value"
-                  id="pers-religion"></span></div>
-              <div class="data-row"><span class="d-label">Date Of Birth :</span><span class="d-value"
-                  id="pers-dob"></span></div>
-              <div class="data-row"><span class="d-label">Original Date of birth :</span><span class="d-value"
-                  id="pers-orig-dob"></span></div>
-              <div class="data-row"><span class="d-label">Caste :</span><span class="d-value" id="pers-caste"></span>
+          <div class="profile-card">
+            <div class="profile-card-header">
+              <div class="profile-card-title-group">
+                <div class="profile-card-icon"><i class="fas fa-user"></i></div>
+                <div class="profile-card-title">Personal</div>
               </div>
-              <div class="data-row"><span class="d-label">Gender :</span><span class="d-value" id="pers-gender"></span>
+              <button class="profile-btn-outline" onclick="toggleEditMode(this)"><i class="fas fa-pen"></i> Edit</button>
+            </div>
+            <div class="profile-body">
+              <div class="profile-col">
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-language"></i> Mother Tongue</div><span class="profile-separator">:</span><div class="profile-val" id="pers-mother-tongue">Telugu</div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="far fa-calendar-alt"></i> Date of Birth</div><span class="profile-separator">:</span><div class="profile-val" id="pers-dob"></div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-lock"></i> Caste</div><span class="profile-separator">:</span><div class="profile-val" id="pers-caste">OC</div>
+                </div>
+              </div>
+              <div class="profile-col">
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-om"></i> Religion</div><span class="profile-separator">:</span><div class="profile-val" id="pers-religion">Hindu</div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="far fa-calendar-alt"></i> Original Date of birth</div><span class="profile-separator">:</span><div class="profile-val" id="pers-orig-dob">15 Aug 1995</div>
+                </div>
+                <div class="profile-info-row">
+                  <div class="profile-label"><i class="fas fa-venus-mars"></i> Gender</div><span class="profile-separator">:</span><div class="profile-val" id="pers-gender">Male</div>
+                </div>
               </div>
             </div>
-            <button class="btn btn-orange btn-edit-abs" onclick="toggleEditMode(this)"><i class="fas fa-edit"></i>
-              Edit</button>
           </div>
         </div>
 
@@ -1254,13 +1443,17 @@
 
     // Toggle Edit Mode Logic for Light Theme
     function toggleEditMode(button) {
-      const card = button.closest('.data-card');
-      const values = card.querySelectorAll('.d-value');
+      const card = button.closest('.data-card') || button.closest('.profile-card');
+      const values = card.querySelectorAll('.d-value, .profile-val');
 
       if (button.innerText.trim() === 'Edit') {
         button.innerHTML = '<i class="fas fa-save"></i> Save';
         button.classList.remove('btn-orange');
         button.classList.add('btn-cyan');
+        if (button.classList.contains('profile-btn-outline')) {
+          button.style.background = 'var(--primary)';
+          button.style.color = 'white';
+        }
 
         values.forEach(span => {
           if (span.querySelector('input')) return; // skip if already input
@@ -1269,9 +1462,13 @@
           span.innerHTML = `<input type="text" value="${text}" />`;
         });
       } else {
-        button.innerHTML = '<i class="fas fa-edit"></i> Edit';
+        button.innerHTML = '<i class="fas fa-pen"></i> Edit';
         button.classList.remove('btn-cyan');
         button.classList.add('btn-orange');
+        if (button.classList.contains('profile-btn-outline')) {
+          button.style.background = 'transparent';
+          button.style.color = 'var(--primary)';
+        }
 
         values.forEach(span => {
           const input = span.querySelector('input');
