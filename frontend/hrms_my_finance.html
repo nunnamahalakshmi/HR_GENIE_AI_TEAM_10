@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8">
   <title>My Finance - HRMS</title>
@@ -11,20 +12,24 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --sidebar-bg: #2b3e50;
-      --sidebar-hover: #34495e;
-      --bg-color: #f2f3f5;
-      --topbar-bg: #2b3e50;
-      --text-main: #333;
-      --brand-green: #16a085;
-      --cyan-btn: #5bc0de;
+      --primary: #0d9298;
+      --primary-hover: #0a6b6e;
+      --sidebar-bg: #0d1e27;
+      --sidebar-hover: #122533;
+      --bg-color: #f4f6f8;
+      --topbar-bg: #ffffff;
+      --text-main: #333333;
+      --border-color: #e5e7eb;
+      --cyan-badge: #0d9298;
     }
+
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -36,6 +41,7 @@
       overflow: hidden;
     }
 
+
     /* Top Bar */
     nav {
       height: 60px;
@@ -44,10 +50,12 @@
       align-items: center;
       padding: 0 20px;
       justify-content: space-between;
-      color: white;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
       z-index: 20;
     }
+
 
     .nav-left {
       display: flex;
@@ -55,11 +63,9 @@
       gap: 20px;
     }
 
-    .hamburger {
-      font-size: 20px;
-      cursor: pointer;
-      color: #88929e;
-    }
+
+    .hamburger { font-size: 20px; cursor: pointer; color: var(--primary); }
+
 
     .logo {
       display: flex;
@@ -67,44 +73,30 @@
       text-decoration: none;
     }
 
-    .logo-icon {
-      background: var(--brand-green);
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
-    }
+
+    .logo-icon { background: var(--primary); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+
 
     .logo-icon i {
       color: #fff;
       font-size: 18px;
     }
 
-    .logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: 0.5px;
-    }
 
-    .logo-highlight {
-      color: var(--brand-green);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 22px;
-    }
+    .logo-text { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--sidebar-bg); letter-spacing: 0.5px; }
+
+
+    .logo-highlight { color: var(--primary); font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 22px; }
+
 
     .nav-user-container {
       position: relative;
       cursor: pointer;
     }
 
+
     .nav-user-circle {
-      background: #e67e22;
+      background: var(--primary);
       width: 35px;
       height: 35px;
       border-radius: 50%;
@@ -113,6 +105,7 @@
       justify-content: center;
       color: #fff;
     }
+
 
     .user-dropdown {
       position: absolute;
@@ -128,9 +121,11 @@
       border: 1px solid #eee;
     }
 
+
     .user-dropdown.show {
       display: flex;
     }
+
 
     .user-dropdown a {
       padding: 12px 15px;
@@ -143,9 +138,11 @@
       transition: background 0.2s;
     }
 
+
     .user-dropdown a:hover {
       background: #f8f9fa;
     }
+
 
     /* Layout */
     .app-body {
@@ -154,29 +151,33 @@
       overflow: hidden;
     }
 
+
     /* Sidebar */
     .sidebar {
       width: 240px;
       background-color: var(--sidebar-bg);
-      color: #b0bac3;
+      color: #94a3b8;
       display: flex;
       flex-direction: column;
       height: 100%;
       flex-shrink: 0;
       overflow-y: auto;
+      background-image: radial-gradient(circle at 20% 90%, rgba(13, 146, 152, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 90%, rgba(10, 107, 110, 0.04) 0%, transparent 50%);
     }
+
 
     .profile-header {
       padding: 30px 20px 20px;
       text-align: center;
     }
 
+
     .avatar-circle {
       width: 70px;
       height: 70px;
       border-radius: 50%;
       background-color: #000;
-      border: 2px solid #e67e22;
+      border: 2px solid var(--primary);
       margin: 0 auto 10px;
       display: flex;
       align-items: flex-end;
@@ -184,11 +185,13 @@
       overflow: hidden;
     }
 
+
     .avatar-circle i {
       font-size: 55px;
       color: #fff;
       margin-bottom: -5px;
     }
+
 
     .profile-name {
       font-size: 14px;
@@ -197,11 +200,13 @@
       margin-top: 10px;
     }
 
+
     .nav-list {
       list-style: none;
       padding: 10px 0;
       flex-grow: 1;
     }
+
 
     .nav-item {
       padding: 12px 25px;
@@ -215,23 +220,11 @@
       transition: all 0.2s;
     }
 
-    .nav-item i {
-      width: 25px;
-      font-size: 14px;
-      text-align: left;
-    }
 
-    .nav-item:hover {
-      background-color: var(--sidebar-hover);
-      color: #fff;
-    }
+    .nav-item i { width: 25px; font-size: 14px; text-align: left; }
+    .nav-item:hover { background-color: var(--sidebar-hover); color: #fff; }
+    .nav-item.active { background-color: var(--primary); color: #fff; border-radius: 0 20px 20px 0; margin-right: 15px; padding-left: 25px; }
 
-    .nav-item.active {
-      background-color: var(--sidebar-hover);
-      color: #fff;
-      border-left: 3px solid #fff;
-      padding-left: 22px;
-    }
 
     /* Main Content */
     .main-wrapper {
@@ -242,12 +235,14 @@
       overflow-y: auto;
     }
 
+
     .top-tab-container {
       width: 100%;
       display: flex;
       justify-content: center;
       padding: 15px 0;
     }
+
 
     .top-tab {
       display: flex;
@@ -256,14 +251,16 @@
       overflow: hidden;
     }
 
+
     .tab-icon {
-      background-color: #5bc0de;
-      color: white;
+      background-color: #e0f2f1;
+      color: var(--primary);
       padding: 8px 15px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
+
 
     .tab-text {
       background-color: white;
@@ -275,6 +272,7 @@
       align-items: center;
     }
 
+
     .content-area {
       flex-grow: 1;
       padding: 10px 30px 30px;
@@ -284,12 +282,14 @@
       justify-content: center;
     }
 
+
     /* Coming Soon Ribbons */
     .coming-soon-wrapper {
       position: relative;
       width: 200px;
       height: 100px;
     }
+
 
     .ribbon {
       background-color: #f15a24;
@@ -303,6 +303,7 @@
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     }
 
+
     .ribbon.coming {
       transform: rotate(-10deg);
       top: 0;
@@ -310,12 +311,14 @@
       z-index: 1;
     }
 
+
     .ribbon.soon {
       transform: rotate(-10deg);
       top: 40px;
       left: 40px;
       z-index: 2;
     }
+
 
     /* Ribbon Flag Cutouts */
     .ribbon::before,
@@ -329,10 +332,12 @@
       border-bottom: 17px solid transparent;
     }
 
+
     .ribbon::before {
       left: -12px;
       border-right: 12px solid #f15a24;
     }
+
 
     .ribbon::after {
       right: -12px;
@@ -341,7 +346,9 @@
   </style>
 </head>
 
+
 <body>
+
 
   <!-- Navbar -->
   <nav>
@@ -352,6 +359,7 @@
         <div class="logo-text">HRMS <span class="logo-highlight">Portal</span></div>
       </a>
     </div>
+
 
     <div class="nav-user-container">
       <div class="nav-user" onclick="toggleDropdown()">
@@ -366,6 +374,7 @@
     </div>
   </nav>
 
+
   <div class="app-body">
     <!-- Sidebar -->
     <div class="sidebar">
@@ -375,6 +384,7 @@
         </div>
         <div class="profile-name" id="sidebar-profile-name"></div>
       </div>
+
 
       <ul class="nav-list">
         <!-- <li><a href="hrms_self_details-page.html" class="nav-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> -->
@@ -389,8 +399,10 @@
       </ul>
     </div>
 
+
     <!-- Main Wrapper -->
     <div class="main-wrapper">
+
 
       <div class="top-tab-container">
         <div class="top-tab">
@@ -399,8 +411,10 @@
         </div>
       </div>
 
+
       <!-- Content Area -->
       <div class="content-area">
+
 
         <!-- Reusable Coming Soon UI -->
         <div class="coming-soon-wrapper">
@@ -408,16 +422,21 @@
           <div class="ribbon soon">SOON!</div>
         </div>
 
+
       </div>
+
 
     </div>
   </div>
+
 
   <script>
     // Power Automate Backend Integration for Profile Name
     const POWER_AUTOMATE_GET_URL = "https://default7359f89671e24daeb8a315cdf97f2f.10.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/ec32b60336464dcf875ee72b34c70463/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KA0ATqlhW8Tx7IdB9wmtWdNz_KMt_gGuPf0bUbMA0g4";
 
+
     window.onload = fetchProfileData;
+
 
     async function fetchProfileData() {
       try {
@@ -425,12 +444,15 @@
         const finalUrl = POWER_AUTOMATE_GET_URL + "&email=" + encodeURIComponent(userEmail);
         const response = await fetch(finalUrl);
 
+
         let data = await response.json();
+
 
         if (Array.isArray(data)) {
           if (data.length === 0) return;
           data = data[0];
         }
+
 
         document.getElementById('sidebar-profile-name').innerText = data.name || "Guest User";
       } catch (error) {
@@ -438,10 +460,12 @@
       }
     }
 
+
     // Dropdown toggle
     function toggleDropdown() {
       document.getElementById("userDropdown").classList.toggle("show");
     }
+
 
     window.addEventListener('click', function (e) {
       const container = document.querySelector('.nav-user-container');
@@ -453,17 +477,21 @@
       }
     });
 
+
     // Finance Tab Switching Logic
     function switchFinanceSection(sectionId, element) {
       if (event) event.preventDefault();
 
+
       const tabIcon = document.querySelector('.tab-icon i');
       const tabText = document.querySelector('.tab-text');
+
 
       if (sectionId === 'payslip') { tabIcon.className = 'fas fa-file-invoice-dollar'; tabText.innerText = 'Pay Slip'; }
       else if (sectionId === 'sdf') { tabIcon.className = 'fas fa-file-alt'; tabText.innerText = 'SDF'; }
       else if (sectionId === 'salary') { tabIcon.className = 'fas fa-money-bill-wave'; tabText.innerText = 'Salary'; }
       else if (sectionId === 'insurance') { tabIcon.className = 'fas fa-users'; tabText.innerText = 'Group Insurance'; }
+
 
       // Update sidebar active class
       if (element) {
@@ -471,12 +499,16 @@
         element.classList.add('active');
       }
 
-      // Note: Because all 4 tabs just show the "Coming Soon" ribbon, 
-      // we don't need to actually toggle visibility of different sections! 
+
+      // Note: Because all 4 tabs just show the "Coming Soon" ribbon,
+      // we don't need to actually toggle visibility of different sections!
       // The single ribbon wrapper stays on the screen.
     }
   </script>
 
+
 </body>
 
+
 </html>
+
